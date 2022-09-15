@@ -1,5 +1,9 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 3/6: Sorting it out
+
+Added argument `-sortIntegers` which, if passed, will change the output to display the number of integers input, and then a sorted list of said integers.
+
 ### Stage 2/6: Not just numbers
 
 Tool now takes the `-dataType` argument and collects/reports data differently depending on the argument given.

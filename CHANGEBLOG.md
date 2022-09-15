@@ -1,5 +1,11 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 3/6: Sorting it out
+
+Oh man, I am not feeling it today.
+I had my COVID-19 booster shot the other day and my head's been in a bit of a fog today as a result.
+This was easy enough. I moved around some things for the logic, and started to use enums instead of just strings to handle arguments.
+
 ### Stage 2/6: Not just numbers
 
 This wasn't too bad. The hardest challenge for me this Stage was not being at my usual desk without my normal setup.

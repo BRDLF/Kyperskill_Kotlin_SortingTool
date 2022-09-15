@@ -2,19 +2,47 @@ package sorting
 
 object Sorter {
     private val inputList = mutableListOf<String>()
-
-    fun sort(args: Array<String>) {
-        val type = getMeasure(args)
-
-        fillList(type)
-        listInfo(type)
+    enum class dataType(val arg: String) {
+        LONG("long"),
+        LINE("line"),
+        WORD("word")
+    }
+    enum class behavior(val arg: String) {
+        LIST("list"),
+        SORT("sort")
     }
 
-    private fun getMeasure(args: Array<String>): String {
+    fun run(args: Array<String>) {
+        if (args.contains("-sortIntegers")) {
+            sort(dataType.LONG, behavior.SORT)
+        }
+        else {
+            sort(passedType = determineType(args))
+        }
+    }
+
+    private fun sort(passedType: dataType = dataType.WORD, passedBehavior: behavior = behavior.LIST) {
+
+        fillList(passedType.arg)
+
+        when (passedBehavior.name) {
+            "LIST" -> listInfo(passedType.arg)
+            "SORT" -> listSorted(passedType.arg)
+        }
+
+    }
+
+    private fun determineType(args: Array<String>): dataType {
         return when (val dataTypeAddress = args.indexOf("-dataType")) {
-            -1 -> "word"
-            args.size -> "word"
-            else -> args[dataTypeAddress + 1]
+            -1 -> dataType.WORD //-dataType not passed
+            args.size -> dataType.WORD //-dataType passed with no type following
+            else -> {
+                val caughtDataType = args[dataTypeAddress + 1]
+                for(targetType in dataType.values()) {
+                    if (caughtDataType == targetType.arg) return targetType
+                }
+                dataType.WORD
+            }
         }
     }
 
@@ -57,12 +85,21 @@ object Sorter {
                 greatestFrequency = inputList.count { it == inputList[greatestIndex] }
             }
         }
-        printout(greatestIndex, greatestFrequency, type)
+        infoPrint(greatestIndex, greatestFrequency, type)
 
 
     }
 
-    private fun printout(greatestIndex: Int, freq: Int, type: String = "word") {
+    private fun listSorted(type: String) {
+        val sortedList = when (type) {
+            "long" -> inputList.map { it.toInt() }.sorted()
+            else -> inputList.sorted()
+        }
+        println("Total numbers: ${sortedList.size}.")
+        println("Sorted data: ${sortedList.joinToString(" ")}")
+    }
+
+    private fun infoPrint(greatestIndex: Int, freq: Int, type: String) {
         val percent = ((freq.toDouble() / inputList.size) * 100).toInt()
         val printType = if (type == "long") "number" else type
         val printMeasure = if (type == "long") "great" else "long"
@@ -78,5 +115,5 @@ object Sorter {
 }
 
 fun main(args: Array<String>) {
-    Sorter.sort(args)
+    Sorter.run(args)
 }
