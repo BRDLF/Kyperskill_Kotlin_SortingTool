@@ -1,5 +1,19 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 4/6: Everything Counts
+
+Alright I'm not feeling nearly as ill today. Though I have found myself distracted with other hobbies, printing, mostly.
+I had to rewrite a fair bit of code for this, but as a result everything looks a lot nicer. I feel like I could make the program run in fewer lines of code but would be less easy to read.
+That said I KNOW there's a better way to do some of the things I'm trying. 
+
+Enums in particular I feel only faintly familiar with. I'd really like to learn what a companion object is, I see IDEA recommend I use one frequently.
+I'm sure it's possible to make both `DataType` and `SortType` children of the same extensible enum class, then turn `determineData()` and `determineSort()` could be a method of the parent class called `determine()` or something. 
+Eliminates some redundancy while keeping things easy to read.
+
+Ah well, maybe that's something to do in between stages, or after everything has been done, as a treat. For now, that's all.
+
+Bye-bye!
+
 ### Stage 3/6: Sorting it out
 
 Oh man, I am not feeling it today.

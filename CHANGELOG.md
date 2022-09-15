@@ -1,5 +1,11 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 4/6: Everything Counts
+
+Changed argument `-sortIntegers` to `-sortingType` which accepts either `natural` or `byCount`. Default is `natural`
+If `natural`, program will display input data sorted naturally.
+If `byCount`, program will display input data sorted by # of occurrences. Items with the same # of occurrences are sorted naturally.
+
 ### Stage 3/6: Sorting it out
 
 Added argument `-sortIntegers` which, if passed, will change the output to display the number of integers input, and then a sorted list of said integers.
