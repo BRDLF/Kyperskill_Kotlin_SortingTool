@@ -1,5 +1,9 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 5/6: Error!
+
+Added error checking. Program will not fail if invalid parameters are sent or if parameters are sent without values.
+
 ### Stage 4/6: Everything Counts
 
 Changed argument `-sortIntegers` to `-sortingType` which accepts either `natural` or `byCount`. Default is `natural`

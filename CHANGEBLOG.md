@@ -1,5 +1,32 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 5/6: Error!
+
+Huh, alright. I was wondering when I would be asked to actually evaluate arguments and check for errors. I was doing it a bit lazily before.
+Admittedly it still feels like I'm only doing the bare minimum now.
+If an argument is passed with multiple values like `-sortType invalid byCount natural` it only evaluates the first value `invalid` which will as a result set the sorting type to the default of `NATURAL`
+Could theoretically iterate over the passed values and assign the first valid value passed. Like:
+
+Check that `invalid` is a valid value for `-sortType`. If not, check that there are other values passed for the argument. check for the next one (`byCount` in this case) and assign accordingly.
+Then, if the list is exhausted with no valid arguments, say something like "Hey guy, you passed like 6 values for -sortType and none of them are valid, what the heck?"
+Oh yeah, my earlier code for checking if an argument was at the end of the List was wrong, haha, was using `.size` instead of `.lastIndex`. Oops!
+
+That seems unnecessary though. Since as it functions right now users SHOULDN'T be passing multiple values per parameter.
+
+I wanted to say "I finally sorted out the abstraction so `determineData()` and `determineSort()` are the same function now!" 
+But all I really did was move the abstraction into the companion classes for their respective class.
+
+Oh yeah, figured out what companion classes are. Neat, so it's like static. 
+Theoretically I could have not used companion classes and just used a function inside the enum without. 
+But then when I call it I'd have to call it on an instance like `DataType.WORD.byArgVal(argVal)`.
+Actually now that I think of it I could just call it on the instance of `dataType` inside the `Sorter` object... 
+Yeahhhhhh, but then without the companion object every instance of `DataType` gets their own copy of the function and I don't want/need that.
+I'm actually not sure about the low-level goings-on of it all. Maybe one really is better than the other.
+
+I'll finish by saying. My names could use some work. Having a `DataType` enum and an instance of it, `dataType` might be confusing to someone looking at it for the first time.
+But I'm worried about becoming too verbose and making it hard to read because of said verbosity. 
+
+
 ### Stage 4/6: Everything Counts
 
 Alright I'm not feeling nearly as ill today. Though I have found myself distracted with other hobbies, printing, mostly.
