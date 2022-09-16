@@ -7,44 +7,78 @@ object Sorter {
     private val argumentsList = mutableListOf<String>()
     private var dataType: DataType = DataType.WORD
     private var sortType: SortType = SortType.NATURAL
-    enum class DataType(val arg: String, val print: String) {
+
+    private val validArguments = listOf<String>("-sortingType", "-dataType")
+
+
+    enum class DataType(val argName: String, val print: String) {
         LONG("long", "number"),
         LINE("line", "line"),
         WORD("word", "word");
+
+        companion object {
+            fun byArgVal(argName: String): DataType {
+                for (value in DataType.values()) {
+                    if (value.argName == argName) return value
+                }
+                return WORD
+            }
+        }
+
     }
-    enum class SortType(val arg: String) {
+    enum class SortType(val argName: String) {
         NATURAL("list"),
         COUNT("byCount");
+
+        companion object {
+            fun byArgVal(argName: String): SortType {
+                for (value in SortType.values()) {
+                    if (value.argName == argName) return value
+                }
+                return NATURAL
+            }
+        }
     }
-    private fun updateArgs(args: Array<String>) {
+    private fun updateArgumentsList(args: Array<String>) {
         argumentsList.clear()
         argumentsList.addAll(args)
     }
-    private fun determineData() {
-        val argAddress = argumentsList.indexOf("-dataType")
-        if (argAddress != -1 && argAddress != argumentsList.size) {
-            val caughtDataType = argumentsList[argAddress + 1]
-            for(targetType in DataType.values()) {
-                if (caughtDataType == targetType.arg) dataType = targetType
+
+    private fun parseArgs() {
+        for (arg in argumentsList.filter { it.startsWith("-") }) {
+            if (!validArguments.contains(arg)) {
+                println("\"${arg}\" is not a valid parameter. It will be skipped")
+                continue
+            }
+            when (arg) {
+                "-dataType" -> {
+                    val argVal = argumentValueOf(arg)?: throw IllegalArgumentException("No data type defined!")
+                    dataType = DataType.byArgVal(argVal)
+                }
+                "-sortingType" -> {
+                    val argVal = argumentValueOf(arg)?: throw IllegalArgumentException("No sort type defined!")
+                    sortType = SortType.byArgVal(argVal)
+                }
             }
         }
-        else dataType = DataType.WORD
     }
-    private fun determineSort() {
-        val argAddress = argumentsList.indexOf("-sortingType")
-        if (argAddress != -1 && argAddress != argumentsList.size) {
-            val caughtSortType = argumentsList[argAddress + 1]
-            for(targetType in SortType.values()) {
-                if (caughtSortType == targetType.arg) sortType = targetType
-            }
-        }
-        else sortType = SortType.NATURAL
+
+    private fun argumentValueOf(arg: String): String? {
+        val argAddress = argumentsList.indexOf(arg)
+        if (argAddress == - 1) throw IllegalArgumentException("validateArg passed for $arg which is not in argsList")
+        if (argAddress == argumentsList.lastIndex) return null
+        if (argumentsList[argAddress + 1].startsWith("-")) return null
+        return argumentsList[argAddress + 1]
     }
 
     fun run(args: Array<String>) {
-        updateArgs(args)
-        determineData()
-        determineSort()
+        updateArgumentsList(args)
+        try {
+            parseArgs()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+        }
+
 
         fillList()
 
@@ -57,7 +91,16 @@ object Sorter {
                 val input = readlnOrNull()?: break
                 if (input.isNotBlank()) inputList.add(input)
             } while (true)
-            else -> do {
+            DataType.LONG -> do {
+                val input = readlnOrNull()?: break
+                input.trim().split(" +".toRegex())
+                    .filter { it.isNotBlank() }
+                    .forEach {
+                        it.toIntOrNull()?: println("$it is not a valid parameter. It will be skipped.")
+                        inputList.add(it)
+                    }
+            } while (true)
+            DataType.WORD -> do {
                 val input = readlnOrNull()?: break
                 input.trim().split(" +".toRegex())
                     .filter { it.isNotBlank()}
