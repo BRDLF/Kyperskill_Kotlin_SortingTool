@@ -1,5 +1,10 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 6/6: X-files
+
+Added support for file I/O
+Moved state from `Sorter` object to `run()` internal function.
+
 ### Stage 5/6: Error!
 
 Added error checking. Program will not fail if invalid parameters are sent or if parameters are sent without values.

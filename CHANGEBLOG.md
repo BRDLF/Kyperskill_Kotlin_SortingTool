@@ -1,5 +1,21 @@
 # Hyperskill_Kotlin_Sorting Tool
 
+### Stage 6/6: X-files
+
+All done!
+Okay, so that one didn't give me nearly as much trouble as the last. I feel like a lot of the code here is still... Rough.
+Shoddy. It doesn't take into accounts edge cases and only works exactly within the narrow box of intention.
+In particular the file I/O. No catches for being unable to read from a file. NO catches for not being able to write a file.
+Still no checks for multiple argument values.
+The function to read input has two separate but similar functions that could be tightened up like how the output is.
+Like instead of `fromConsole()` and `fromFile` I could have a single `readInput()` function that behaves differently based on whether inputFileName is null.
+While I'm on it. IDK that checking for null like that is the best way to handle that? I mean it's definitely not the worst, it just seems... sloppy.
+I could go through the effort of changing all that, but I just don't see the point for right now?
+I guess with the SmartCalculator it at least seemed more practical to make those changes, IDK.
+Perhaps it'll be a rainy day code project to add/fix all that stuff.
+
+Thanks for reading, So long!
+
 ### Stage 5/6: Error!
 
 Huh, alright. I was wondering when I would be asked to actually evaluate arguments and check for errors. I was doing it a bit lazily before.
@@ -43,6 +59,7 @@ Bye-bye!
 
 ### Stage 3/6: Sorting it out
 
+Oh man, I am not feeling it today.
 Oh man, I am not feeling it today.
 I had my COVID-19 booster shot the other day and my head's been in a bit of a fog today as a result.
 This was easy enough. I moved around some things for the logic, and started to use enums instead of just strings to handle arguments.
